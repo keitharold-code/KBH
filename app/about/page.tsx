@@ -1,4 +1,4 @@
-import { Eyebrow, Heading, PageHero, Prose, Rule, Section } from "@/components/ui";
+import { Chapter, Heading, PageHero, Prose } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { about } from "@/content/about";
 import { values } from "@/content/philosophy";
@@ -9,69 +9,55 @@ export const metadata = pageMetadata("About", "The history, mission, governance 
 export default function About() {
   return (
     <>
-      <PageHero eyebrow="About" title="A holding company, built for the long term.">
-        <p>One owner, one standard and a horizon measured in decades.</p>
+      <PageHero folio="Nº 01 · About" title="A holding company, built for the long term." seed="about">
+        <p>One owner, one standard, and a horizon measured in decades.</p>
       </PageHero>
 
-      <Section tone="ivory" labelledBy="history">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <Eyebrow tone="ivory">History</Eyebrow>
-            <Rule className="my-6" />
-            <Heading id="history" tone="ivory" className="md:text-5xl">How we came to be.</Heading>
-          </Reveal>
-          <Reveal className="lg:col-span-7 lg:col-start-6">
-            <Prose>{about.history.map((p) => <p key={p}>{p}</p>)}</Prose>
-          </Reveal>
-        </div>
-      </Section>
-
-      <Section tone="ink" labelledBy="mission">
-        <div className="grid gap-16 md:grid-cols-2">
-          <Reveal>
-            <Eyebrow>Mission</Eyebrow>
-            <Rule className="my-6" />
-            <h2 id="mission" className="font-display text-3xl font-light leading-snug md:text-4xl">{about.mission}</h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Eyebrow>Vision</Eyebrow>
-            <Rule className="my-6" />
-            <p className="font-display text-3xl font-light leading-snug md:text-4xl">{about.vision}</p>
-          </Reveal>
-        </div>
-      </Section>
-
-      <Section tone="ivory" labelledBy="governance">
+      <Chapter tone="ivory" mark="§ I" label="History" labelledBy="history">
+        <Heading id="history" className="sr-only">History</Heading>
         <Reveal>
-          <Eyebrow tone="ivory">Governance</Eyebrow>
-          <Rule className="my-6" />
-          <Heading id="governance" tone="ivory">Structure before capital.</Heading>
+          <Prose className="max-w-[40rem] text-xl leading-[1.7] first-letter:float-left first-letter:mr-4 first-letter:mt-1 first-letter:font-display first-letter:text-[5.5rem] first-letter:leading-[0.8] first-letter:text-ink">
+            {about.history.map((p) => <p key={p}>{p}</p>)}
+          </Prose>
         </Reveal>
-        <dl className="mt-16 grid gap-x-12 gap-y-4 md:grid-cols-2">
+      </Chapter>
+
+      <Chapter tone="ink" mark="§ II" label="Mission & vision" labelledBy="mission">
+        <Reveal>
+          <h2 id="mission" className="font-display text-[clamp(2rem,4.2vw,3.75rem)] leading-[1.1]">{about.mission}</h2>
+          <p className="mt-14 max-w-2xl border-t border-ink-line pt-8 font-display text-2xl leading-snug text-ivory/80">
+            <span className="label mb-3 block text-gold">Vision</span>
+            {about.vision}
+          </p>
+        </Reveal>
+      </Chapter>
+
+      <Chapter tone="ivory" mark="§ III" label="Governance" labelledBy="governance">
+        <Heading id="governance" className="max-w-[14ch]">Structure before capital.</Heading>
+        <dl className="mt-16 border-b border-ink/20">
           {about.governance.map((g, i) => (
-            <Reveal key={g.title} delay={(i % 2) * 0.1} className="border-t border-gold py-8">
-              <dt className="font-display text-2xl">{g.title}</dt>
-              <dd className="mt-3 leading-[1.85] text-stone-dark">{g.body}</dd>
+            <Reveal key={g.title} className="grid gap-x-8 gap-y-3 border-t border-ink/20 py-8 md:grid-cols-[1fr_1.3fr]">
+              <dt className="font-display text-3xl leading-tight">
+                <span className="label mb-2 block text-gold-ink">Art. {i + 1}</span>
+                {g.title}
+              </dt>
+              <dd className="leading-[1.75] text-stone-dark">{g.body}</dd>
             </Reveal>
           ))}
         </dl>
-      </Section>
+      </Chapter>
 
-      <Section tone="ink" labelledBy="values">
-        <Reveal>
-          <Eyebrow>Values</Eyebrow>
-          <Rule className="my-6" />
-          <Heading id="values">What we hold to.</Heading>
-        </Reveal>
-        <ul className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map((v, i) => (
-            <Reveal as="li" key={v.title} delay={i * 0.08} className="border-t border-gold pt-6">
-              <h3 className="font-display text-2xl">{v.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ivory/70">{v.body}</p>
-            </Reveal>
+      <Chapter tone="ink" mark="§ IV" label="Values" labelledBy="values">
+        <h2 id="values" className="sr-only">Values</h2>
+        <ul className="grid gap-px bg-ink-line sm:grid-cols-2">
+          {values.map((v) => (
+            <li key={v.title} className="bg-ink p-8 pl-0 sm:odd:pr-10 sm:even:pl-10">
+              <h3 className="font-display text-4xl">{v.title}</h3>
+              <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/70">{v.body}</p>
+            </li>
           ))}
         </ul>
-      </Section>
+      </Chapter>
     </>
   );
 }

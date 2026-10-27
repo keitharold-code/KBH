@@ -16,6 +16,7 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       letterSpacing: { eyebrow: "0.28em", wordmark: "0.32em" },
       transitionTimingFunction: { quart: "cubic-bezier(0.25, 1, 0.5, 1)" },
