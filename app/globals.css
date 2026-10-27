@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* CSS-only so the hero never waits on JS hydration. */
+  .hero-fade { animation: hero-fade 900ms cubic-bezier(0.25, 1, 0.5, 1) 200ms both; }
+  @keyframes hero-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid #b08d57;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: #b08d57;
+    color: #0b0b0c;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
