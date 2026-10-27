@@ -46,5 +46,6 @@ grep -rnE "\[\[|CONFIRM" content app components public/images/README.md
 
 - All pages are statically generated. Only the contact server action runs on demand, so `output: "export"` is **not** used (static export does not support server actions). If a fully static host is ever required, replace the action with a Route Handler or a form service.
 - Spam control: hidden honeypot field plus an in-memory rate limit (3 per 10 minutes per IP, `lib/ratelimit.ts`). In-memory counters are per serverless instance; for strict limits swap in Upstash Ratelimit.
+- Design language: engraved security-print (banknote / bond certificate). Fonts: Libre Caslon Display (headlines), Hanken Grotesk (text), DM Mono (labels). `components/Guilloche.tsx` generates a unique rosette per company slug, so portfolio tiles need no photography. `components/Logo.tsx` holds the placeholder seal and wordmark; replace `<Seal />` to swap the identity.
 - Colour use: gold (`#B08D57`) is 2.7:1 on ivory and is therefore decorative there. Text on ivory uses `gold-ink` (5.3:1) or `stone-dark` (6.3:1). See `tailwind.config.ts`.
 - Security headers are set in `next.config.mjs`. Add a CSP once analytics (if any) is chosen.

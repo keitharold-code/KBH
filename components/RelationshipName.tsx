@@ -6,5 +6,5 @@ export function RelationshipName({ r, className = "" }: { r: Relationship; class
   if (r.logoApproved && r.logo) {
     return <Image src={r.logo} alt={r.name} width={160} height={48} className="h-10 w-auto object-contain object-left" />;
   }
-  return <p className={`font-display font-normal leading-tight ${className}`}>{r.name}</p>;
+  return <p className={`font-display leading-tight ${className}`}>{r.name}</p>;
 }

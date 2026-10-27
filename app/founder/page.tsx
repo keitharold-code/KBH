@@ -1,4 +1,4 @@
-import { Eyebrow, Heading, PageHero, Prose, Rule, Section } from "@/components/ui";
+import { Chapter, PageHero, Prose, Heading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/Photo";
 import { founder } from "@/content/founder";
@@ -12,50 +12,43 @@ export default function Founder() {
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Person", name: founder.name, jobTitle: founder.title, worksFor: { "@type": "Organization", name: site.name } }} />
-      <PageHero eyebrow="Founder" title={founder.name}>
+      <PageHero folio="Nº 02 · Founder" title={founder.name} seed="founder">
         <p>{founder.title}, {site.name}</p>
       </PageHero>
 
-      <Section tone="ivory" labelledBy="bio">
-        <div className="grid gap-16 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <Photo file="founder-portrait.jpg" alt="Portrait of Keith Harold Mugabi, founder" className="aspect-[4/5] w-full" sizes="(min-width: 1024px) 33vw, 100vw" />
+      <Chapter tone="ivory" mark="§ I" label="Biography" labelledBy="bio">
+        <h2 id="bio" className="sr-only">Biography</h2>
+        <div className="grid gap-16 md:grid-cols-12">
+          <Reveal className="md:col-span-5">
+            <Photo file="founder-portrait.jpg" alt="Portrait of Keith Harold Mugabi, founder" arch caption="Portrait" className="aspect-[3/4] w-full" sizes="(min-width: 768px) 30vw, 90vw" />
           </Reveal>
-          <Reveal className="lg:col-span-7 lg:col-start-6">
-            <Eyebrow tone="ivory">Biography</Eyebrow>
-            <Rule className="my-6" />
-            <h2 id="bio" className="sr-only">Biography</h2>
+          <Reveal className="md:col-span-7">
             <Prose>{founder.biography.map((p) => <p key={p}>{p}</p>)}</Prose>
-            <div className="mt-14">
-              <Eyebrow tone="ivory">Education</Eyebrow>
-              <dl className="mt-6">
-                {founder.education.map((e) => (
-                  <div key={e.award} className="border-t border-gold py-5">
-                    <dt className="font-display text-2xl">{e.award}</dt>
-                    <dd className="mt-1 text-sm text-stone-dark">{e.institution}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+            <p className="label mt-16 text-gold-ink">Education</p>
+            <dl className="mt-4 border-b border-ink/20">
+              {founder.education.map((e) => (
+                <div key={e.award} className="grid gap-2 border-t border-ink/20 py-5 md:grid-cols-2">
+                  <dt className="font-display text-2xl">{e.award}</dt>
+                  <dd className="text-sm text-stone-dark">{e.institution}</dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </div>
-      </Section>
+      </Chapter>
 
-      <Section tone="ink" labelledBy="letter">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <Eyebrow>A letter</Eyebrow>
-            <Rule className="my-6" />
-            <Heading id="letter" className="md:text-5xl">On building to last.</Heading>
-          </Reveal>
-          <Reveal className="lg:col-span-7 lg:col-start-6">
-            <Prose tone="ink">
-              {founder.letter.map((p) => <p key={p} className="text-lg">{p}</p>)}
-              <p className="pt-6 font-display text-3xl font-light text-ivory">{founder.signature}</p>
-            </Prose>
-          </Reveal>
-        </div>
-      </Section>
+      <Chapter tone="ink" mark="§ II" label="A letter" labelledBy="letter">
+        <Heading id="letter" className="max-w-[14ch]">On building to last.</Heading>
+        <Reveal className="mt-14 bg-ivory p-8 text-ink md:p-16">
+          <Prose className="max-w-[36rem] text-lg">
+            {founder.letter.map((p, i) => (
+              <p key={p} className={i === 0 ? "first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[4.75rem] first-letter:leading-[0.8] first-letter:text-ink" : ""}>{p}</p>
+            ))}
+          </Prose>
+          <p className="mt-12 font-display text-4xl">{founder.signature}</p>
+          <p className="label mt-2 text-stone-dark">{founder.title}</p>
+        </Reveal>
+      </Chapter>
     </>
   );
 }

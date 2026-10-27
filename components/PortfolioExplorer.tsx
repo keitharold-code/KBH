@@ -4,20 +4,26 @@ import { useMemo, useState } from "react";
 import type { Company, Status } from "@/content/portfolio";
 import { STATUSES } from "@/content/portfolio";
 import { SECTORS, type Sector } from "@/content/sectors";
-import { CompanyCard } from "./CompanyCard";
+import { RegisterRow } from "./CompanyCard";
 
-function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+function Filter<T extends string>({ legend, options, value, onChange }: { legend: string; options: readonly T[]; value: T | "All"; onChange: (v: T | "All") => void }) {
   return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      className={`border px-4 py-2 text-[0.7rem] uppercase tracking-eyebrow transition-colors duration-500 ${
-        active ? "border-ink bg-ink text-ivory" : "border-stone/60 text-stone-dark hover:border-ink hover:text-ink"
-      }`}
-    >
-      {children}
-    </button>
+    <fieldset className="grid gap-3 md:grid-cols-[7rem_1fr] md:items-baseline">
+      <legend className="label float-left mb-2 w-28 text-gold-ink md:mb-0">{legend}</legend>
+      <div className="flex flex-wrap gap-x-6 gap-y-2 md:col-start-2">
+        {(["All", ...options] as (T | "All")[]).map((o) => (
+          <button
+            key={o}
+            type="button"
+            aria-pressed={value === o}
+            onClick={() => onChange(o)}
+            className={`label border-b pb-1 transition-colors duration-500 ${value === o ? "border-ink text-ink" : "border-transparent text-stone-dark hover:text-ink"}`}
+          >
+            {o}
+          </button>
+        ))}
+      </div>
+    </fieldset>
   );
 }
 
@@ -26,46 +32,23 @@ export function PortfolioExplorer({ companies }: { companies: Company[] }) {
   const [status, setStatus] = useState<Status | "All">("All");
 
   const shown = useMemo(
-    () =>
-      companies.filter(
-        (c) =>
-          (sector === "All" || c.sector === sector || c.alsoIn?.includes(sector)) &&
-          (status === "All" || c.status === status),
-      ),
+    () => companies.filter((c) => (sector === "All" || c.sector === sector || c.alsoIn?.includes(sector)) && (status === "All" || c.status === status)),
     [companies, sector, status],
   );
   const activeSectors = SECTORS.filter((s) => companies.some((c) => c.sector === s || c.alsoIn?.includes(s)));
 
   return (
     <div>
-      <div className="space-y-6 border-b border-ink/15 pb-10">
-        <fieldset>
-          <legend className="mb-3 text-[0.7rem] uppercase tracking-eyebrow text-gold-ink">Sector</legend>
-          <div className="flex flex-wrap gap-2">
-            <Chip active={sector === "All"} onClick={() => setSector("All")}>All</Chip>
-            {activeSectors.map((s) => (
-              <Chip key={s} active={sector === s} onClick={() => setSector(s)}>{s}</Chip>
-            ))}
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend className="mb-3 text-[0.7rem] uppercase tracking-eyebrow text-gold-ink">Status</legend>
-          <div className="flex flex-wrap gap-2">
-            <Chip active={status === "All"} onClick={() => setStatus("All")}>All</Chip>
-            {STATUSES.map((s) => (
-              <Chip key={s} active={status === s} onClick={() => setStatus(s)}>{s}</Chip>
-            ))}
-          </div>
-        </fieldset>
+      <div className="space-y-5 pb-10">
+        <Filter legend="Sector" options={activeSectors} value={sector} onChange={setSector} />
+        <Filter legend="Status" options={STATUSES} value={status} onChange={setStatus} />
       </div>
-      <p className="mt-6 text-sm text-stone-dark" aria-live="polite">
-        {shown.length} {shown.length === 1 ? "company" : "companies"}
+      <p className="label pb-4 text-stone-dark" aria-live="polite">
+        Register: {shown.length} {shown.length === 1 ? "entry" : "entries"}
       </p>
-      <ul className="mt-8 grid gap-x-12 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
-        {shown.map((c) => (
-          <li key={c.slug}>
-            <CompanyCard company={c} />
-          </li>
+      <ul className="border-b border-ink/20">
+        {shown.map((c, i) => (
+          <li key={c.slug}><RegisterRow company={c} index={i} /></li>
         ))}
       </ul>
       {shown.length === 0 && <p className="mt-10 text-stone-dark">No companies match this selection.</p>}

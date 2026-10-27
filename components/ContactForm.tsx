@@ -7,8 +7,8 @@ import { submitEnquiry, type FormState } from "@/app/contact/actions";
 const initial: FormState = { ok: false, message: "" };
 
 const field =
-  "mt-2 w-full border border-ink/25 bg-transparent px-4 py-3.5 text-base text-ink placeholder:text-stone-dark/70 transition-colors duration-500 focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-ink";
-const label = "block text-[0.7rem] uppercase tracking-eyebrow text-stone-dark";
+  "mt-1 w-full rounded-none border-0 border-b border-ink/30 bg-transparent px-0 py-3 font-display text-2xl text-ink transition-colors duration-500 focus:border-ink focus:outline-none focus-visible:border-b-2 focus-visible:border-gold-ink";
+const label = "label block text-stone-dark";
 
 export function ContactForm() {
   const [state, action, pending] = useActionState(submitEnquiry, initial);
@@ -17,8 +17,8 @@ export function ContactForm() {
 
   if (state.ok) {
     return (
-      <div role="status" className="border-t border-gold pt-8">
-        <p className="font-display text-3xl font-light">{state.message}</p>
+      <div role="status" className="border-t border-ink pt-8">
+        <p className="font-display text-4xl leading-tight">{state.message}</p>
       </div>
     );
   }
@@ -84,7 +84,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-3 border border-ink bg-ink px-8 py-4 text-[0.72rem] font-medium uppercase tracking-eyebrow text-ivory transition-colors duration-700 ease-quart hover:bg-transparent hover:text-ink disabled:opacity-60"
+        className="label inline-flex items-center gap-4 border border-ink bg-ink px-9 py-5 text-ivory transition-colors duration-700 ease-quart hover:bg-transparent hover:text-ink disabled:opacity-60"
       >
         {pending ? "Sending" : "Send enquiry"}
       </button>

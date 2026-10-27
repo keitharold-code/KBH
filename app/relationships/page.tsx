@@ -1,4 +1,4 @@
-import { PageHero, Section } from "@/components/ui";
+import { Chapter, PageHero } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { RelationshipName } from "@/components/RelationshipName";
 import { visibleRelationships, describeRelationship } from "@/content/partners";
@@ -10,21 +10,21 @@ export default function Relationships() {
   const rels = visibleRelationships();
   return (
     <>
-      <PageHero eyebrow="Relationships" title="Relationships.">
+      <PageHero folio="Nº 05 · Relationships" title="Relationships." seed="relationships">
         <p>Commercial relationships held by our portfolio companies, described as precisely as we are able.</p>
       </PageHero>
-      <Section tone="ivory">
-        <ul className="grid gap-x-12 gap-y-4 md:grid-cols-2">
-          {rels.map((r, i) => (
-            <Reveal as="li" key={r.name} delay={(i % 2) * 0.1} className="border-t border-gold py-8">
+      <Chapter tone="ivory" mark="§ I" label="Schedule">
+        <ul className="border-b border-ink/20">
+          {rels.map((r) => (
+            <Reveal as="li" key={r.name} className="grid gap-x-8 gap-y-3 border-t border-ink/20 py-9 md:grid-cols-[1.2fr_1fr_1.4fr]">
               <RelationshipName r={r} className="text-4xl" />
-              <p className="mt-2 text-[0.7rem] uppercase tracking-eyebrow text-gold-ink">{r.relationshipType === "Unconfirmed" ? "Details to be confirmed" : r.relationshipType}</p>
-              <p className="mt-4 leading-relaxed text-stone-dark">{r.name} &mdash; {describeRelationship(r)}</p>
+              <p className="label text-gold-ink">{r.relationshipType === "Unconfirmed" ? "Details to be confirmed" : r.relationshipType}</p>
+              <p className="leading-relaxed text-stone-dark">{r.name} &mdash; {describeRelationship(r)}</p>
             </Reveal>
           ))}
         </ul>
-        <p className="mt-16 text-xs text-stone-dark">Trademarks belong to their respective owners.</p>
-      </Section>
+        <p className="label mt-14 text-stone-dark">Trademarks belong to their respective owners.</p>
+      </Chapter>
     </>
   );
 }
