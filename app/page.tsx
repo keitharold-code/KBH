@@ -5,18 +5,16 @@ import { Parallax } from "@/components/Parallax";
 import { Photo } from "@/components/Photo";
 import { Guilloche } from "@/components/Guilloche";
 import { CompanyTile, RegisterRow } from "@/components/CompanyCard";
-import { RelationshipName } from "@/components/RelationshipName";
 import { pillars } from "@/content/philosophy";
 import { SECTORS, sectorSummaries } from "@/content/sectors";
 import { featuredCompanies, portfolio } from "@/content/portfolio";
-import { visibleRelationships, describeRelationship } from "@/content/partners";
+import { RelationshipBanner } from "@/components/RelationshipBanner";
 import { founder } from "@/content/founder";
 
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
 const sectorCount = (s: (typeof SECTORS)[number]) => portfolio.filter((c) => c.sector === s || c.alsoIn?.includes(s)).length;
 
 export default function Home() {
-  const rels = visibleRelationships();
   const featured = featuredCompanies();
   const [lead, second, ...rest] = featured;
   const activeSectors = SECTORS.filter((s) => sectorCount(s) > 0).length;
@@ -130,21 +128,7 @@ export default function Home() {
         </div>
       </Chapter>
 
-      {/* V. Relationships: colophon */}
-      <Chapter tone="ivory" mark="§ V" label="Relationships" labelledBy="rel-h">
-        <Heading id="rel-h" className="max-w-[18ch]">Established commercial relationships.</Heading>
-        <ul className="mt-16 grid gap-10 md:grid-cols-3">
-          {rels.map((r) => (
-            <li key={r.name} className="border-l border-ink/25 pl-6">
-              <RelationshipName r={r} className="text-3xl" />
-              <p className="mt-3 text-sm leading-relaxed text-stone-dark">{describeRelationship(r)}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="label mt-14 text-stone-dark">
-          Trademarks belong to their respective owners. <Link href="/relationships" className="underline underline-offset-4 hover:text-ink">All relationships</Link>
-        </p>
-      </Chapter>
+      <RelationshipBanner />
 
       {/* Enquiry: oversized link */}
       <section className="relative overflow-hidden bg-ink text-ivory" aria-labelledby="cta">

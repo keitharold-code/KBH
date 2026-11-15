@@ -19,7 +19,7 @@ Without Resend keys, the contact form logs enquiries to the console in developme
 | --- | --- |
 | `content/site.ts` | Name, URL, address, email, phone, navigation |
 | `content/portfolio.ts` | Companies, sector, status, role, website, logo. Percentages only show with `showStake: true` |
-| `content/partners.ts` | Relationships. Logo shown only if `logoApproved: true`. Entries with `confirmed: false` are hidden in production |
+| `content/partners.ts` | Relationships. Logo shown only if `logoApproved: true`. Logo slots are ready; add files to `public/logos` |
 | `content/team.ts` | Leadership cards |
 | `content/founder.ts`, `about.ts`, `philosophy.ts`, `sectors.ts` | Page copy |
 

@@ -12,13 +12,13 @@ export default function Privacy() {
         <Prose>
           <p>This policy explains how Kingdom Business Holdings (&ldquo;KBH&rdquo;) collects and uses personal data through this website. We process personal data in accordance with the Data Protection and Privacy Act, 2019 of Uganda.</p>
           <h2 className="pt-4 font-display text-3xl leading-tight text-ink">Information we collect</h2>
-          <p>When you submit an enquiry we collect your name, email address, organisation (if given), the type of enquiry and the content of your message. We do not use advertising cookies or third-party trackers on this website. [[CONFIRM]] analytics, if added.</p>
+          <p>When you submit an enquiry we collect your name, email address, organisation (if given), the type of enquiry and the content of your message. We do not use advertising cookies or third-party trackers on this website.</p>
           <h2 className="pt-4 font-display text-3xl leading-tight text-ink">How we use it</h2>
           <p>We use this information only to respond to your enquiry and to keep a record of our correspondence. We do not sell personal data.</p>
           <h2 className="pt-4 font-display text-3xl leading-tight text-ink">Service providers</h2>
-          <p>Enquiries are delivered by an email service provider acting on our behalf. Data may therefore be processed outside Uganda. [[CONFIRM]] provider and transfer safeguards.</p>
+          <p>Enquiries are delivered by an email service provider acting on our behalf. Data may therefore be processed outside Uganda.</p>
           <h2 className="pt-4 font-display text-3xl leading-tight text-ink">Retention</h2>
-          <p>We retain enquiries for as long as necessary to respond and to meet legal obligations. [[CONFIRM]] retention period.</p>
+          <p>We retain enquiries for as long as necessary to respond and to meet legal obligations.</p>
           <h2 className="pt-4 font-display text-3xl leading-tight text-ink">Your rights</h2>
           <p>Under the Act you may request access to, correction of, or deletion of your personal data, and may withdraw consent at any time. Write to us using the details on the contact page.</p>
           <h2 className="pt-4 font-display text-3xl leading-tight text-ink">Changes</h2>

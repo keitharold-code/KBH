@@ -24,8 +24,8 @@ export function Seal({ size = 40, ring = false, className = "" }: { size?: numbe
           <defs>
             <path id="seal-ring" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0" />
           </defs>
-          <text fill="currentColor" stroke="none" fontSize="9.5" letterSpacing="3.1" style={{ fontFamily: "var(--font-mono)" }}>
-            <textPath href="#seal-ring">KINGDOM BUSINESS HOLDINGS · KAMPALA · </textPath>
+          <text fill="currentColor" stroke="none" fontSize="8" style={{ fontFamily: "var(--font-mono)" }}>
+            <textPath href="#seal-ring" textLength="254" lengthAdjust="spacing">KINGDOM BUSINESS HOLDINGS · KAMPALA ·</textPath>
           </text>
           <circle cx="60" cy="60" r="31" strokeWidth="0.6" />
         </>

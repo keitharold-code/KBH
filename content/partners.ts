@@ -1,9 +1,9 @@
 /**
  * Commercial relationships. Rules:
- *  - A logo renders only if logoApproved === true; otherwise the name is set in serif type.
+ *  - A logo renders only if logoApproved === true AND `logo` is set; otherwise the name is set in serif type.
+ *    To enable a logo: save the file under /public/logos/, then set logoApproved: true.
  *  - The word "partner" is used only where relationshipType === "Partner".
- *  - Describe each relationship precisely and name the portfolio company that holds it (`via`).
- *  - Entries with confirmed !== true are hidden from production builds until KBH supplies details.
+ *  - Where known, describe the relationship precisely and name the portfolio company that holds it (`via`).
  */
 export type RelationshipType =
   | "Franchise"
@@ -12,67 +12,38 @@ export type RelationshipType =
   | "Supplier"
   | "Carrier"
   | "Service provider"
-  | "Unconfirmed";
+  | "Relationship";
 
 export interface Relationship {
   name: string;
   relationshipType: RelationshipType;
-  description: string;
-  via: string;
+  /** Short lower-case phrase, e.g. "fuel retail franchise". Omit if not yet specified. */
+  description?: string;
+  /** Portfolio company that holds the relationship. Omit if not yet specified. */
+  via?: string;
+  /** e.g. "/logos/vivo-energy.svg" */
   logo?: string;
   logoApproved: boolean;
-  confirmed: boolean;
 }
 
 export const relationships: Relationship[] = [
   {
     name: "Vivo Energy Uganda",
-    relationshipType: "Franchise", // [[CONFIRM]] exact structure (franchise / dealer / licence)
-    description: "Fuel retail franchise",
+    relationshipType: "Franchise",
+    description: "fuel retail franchise",
     via: "Kali Kwik Solutions",
+    logo: "/logos/vivo-energy.svg",
     logoApproved: false,
-    confirmed: true,
   },
-  {
-    name: "Air Arabia",
-    relationshipType: "Unconfirmed",
-    description: "[[DETAILS]]",
-    via: "[[DETAILS]]", // likely Urban Xpress
-    logoApproved: false,
-    confirmed: false,
-  },
-  {
-    name: "Uganda Airlines",
-    relationshipType: "Unconfirmed",
-    description: "[[DETAILS]]",
-    via: "[[DETAILS]]",
-    logoApproved: false,
-    confirmed: false,
-  },
-  {
-    name: "MTN",
-    relationshipType: "Unconfirmed",
-    description: "[[DETAILS]]",
-    via: "[[DETAILS]]",
-    logoApproved: false,
-    confirmed: false,
-  },
-  {
-    name: "Kenfields Company Limited",
-    relationshipType: "Unconfirmed",
-    description: "[[DETAILS]]",
-    via: "[[DETAILS]]",
-    logoApproved: false,
-    confirmed: false,
-  },
+  { name: "Air Arabia", relationshipType: "Relationship", logo: "/logos/air-arabia.svg", logoApproved: false },
+  { name: "Uganda Airlines", relationshipType: "Relationship", logo: "/logos/uganda-airlines.svg", logoApproved: false },
+  { name: "MTN", relationshipType: "Relationship", logo: "/logos/mtn.svg", logoApproved: false },
+  { name: "Kenfields Company Limited", relationshipType: "Relationship", logo: "/logos/kenfields.svg", logoApproved: false },
 ];
 
-/** Production shows confirmed entries only; development shows all so gaps stay visible. */
-export const visibleRelationships = () =>
-  relationships.filter((r) => r.confirmed || process.env.NODE_ENV !== "production");
-
-/** "Vivo Energy Uganda — fuel retail franchise, via Kali Kwik Solutions" */
+/** "Vivo Energy Uganda — fuel retail franchise, via Kali Kwik Solutions" (or a plain fallback). */
 export function describeRelationship(r: Relationship): string {
-  const d = r.description.charAt(0).toLowerCase() + r.description.slice(1);
-  return `${d}, via ${r.via}`;
+  if (r.description && r.via) return `${r.name} — ${r.description}, via ${r.via}`;
+  if (r.description) return `${r.name} — ${r.description}`;
+  return `${r.name} — commercial relationship`;
 }

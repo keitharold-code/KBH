@@ -27,9 +27,9 @@ export default function Founder() {
             <p className="label mt-16 text-gold-ink">Education</p>
             <dl className="mt-4 border-b border-ink/20">
               {founder.education.map((e) => (
-                <div key={e.award} className="grid gap-2 border-t border-ink/20 py-5 md:grid-cols-2">
+                <div key={e.award} className="border-t border-ink/20 py-5">
                   <dt className="font-display text-2xl">{e.award}</dt>
-                  <dd className="text-sm text-stone-dark">{e.institution}</dd>
+                  
                 </div>
               ))}
             </dl>

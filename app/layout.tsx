@@ -48,7 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             alternateName: site.shortName,
             url: site.url,
             description: site.description,
-            address: { "@type": "PostalAddress", addressLocality: "Kampala", addressCountry: "UG" },
+            email: site.contact.email,
+            telephone: site.contact.phone,
+            address: { "@type": "PostalAddress", streetAddress: "Kirabo Complex, Bukoto Kisaasi Road", addressLocality: "Kampala", addressCountry: "UG" },
             ...(site.social.linkedin ? { sameAs: [site.social.linkedin] } : {}),
           }}
         />

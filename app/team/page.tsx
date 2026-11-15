@@ -19,7 +19,7 @@ export default function Team() {
               <Photo file={`team/${m.photo ?? "none"}`} alt={`Portrait of ${m.name}`} arch caption="Portrait" className="aspect-[3/4] w-full" sizes="(min-width: 1280px) 25vw, (min-width: 640px) 40vw, 90vw" />
               <h2 className="mt-8 font-display text-3xl leading-tight">{m.name}</h2>
               <p className="label mt-2 text-gold-ink">{m.title}</p>
-              <p className="mt-4 text-sm leading-relaxed text-stone-dark">{m.bio}</p>
+              {m.bio && <p className="mt-4 text-sm leading-relaxed text-stone-dark">{m.bio}</p>}
               {m.linkedin && (
                 <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="label mt-4 inline-block border-b border-ink pb-1 hover:text-gold-ink">
                   LinkedIn<span className="sr-only"> profile of {m.name} (opens in a new tab)</span>
@@ -28,7 +28,6 @@ export default function Team() {
             </Reveal>
           ))}
         </ul>
-        {/* [[TEAM MEMBERS TO BE SUPPLIED]] */}
       </Chapter>
     </>
   );

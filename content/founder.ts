@@ -1,6 +1,6 @@
 export const founder = {
   name: "Keith Harold Mugabi",
-  title: "Founder and Director",
+  title: "Founder & CEO",
   quote: "Enterprises endure when they are built on systems rather than on sentiment.", // [[CONFIRM]] Mr Mugabi to approve or replace
   biography: [
     "Keith Harold Mugabi is the founder of Kingdom Business Holdings and a director and co-founder of several companies in Uganda and the wider region.",
@@ -8,8 +8,8 @@ export const founder = {
     "Over time his interests broadened from technology into logistics, construction, energy retail, agriculture and financial services. The common thread is a preference for businesses that can be measured, governed and scaled with care.",
   ],
   education: [
-    { award: "BSc Information Technology", institution: "[[CONFIRM institution]]" },
-    { award: "MSc Business Information Systems Management", institution: "[[CONFIRM institution]]" },
+    { award: "BSc Information Technology" },
+    { award: "MSc Business Information Systems Management" },
   ],
   // [[CONFIRM]] The letter below is drafted from stated principles. It must be reviewed and approved by Mr Mugabi.
   letter: [

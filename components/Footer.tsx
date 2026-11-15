@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-ink text-ivory">
       <div className="mx-auto grid max-w-[88rem] gap-14 px-6 pb-16 pt-24 md:px-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Seal size={168} ring className="text-gold" />
+          <Seal size={184} ring className="text-gold" />
           <p className="mt-8 max-w-xs font-display text-2xl leading-snug">{site.tagline}</p>
         </div>
         <nav aria-label="Footer" className="lg:col-span-3 lg:col-start-6">
